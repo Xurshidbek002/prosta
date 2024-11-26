@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Stars</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: radial-gradient(circle, #000000, #1a1a1a);
+        overflow: hidden;
+        position: relative;
+        font-family: Arial, sans-serif;
+        user-select: none;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      header {
+        position: absolute;
+        top: 20%;
+        text-align: center;
+        display: none;
+      }
+
+      h1 {
+        font-size: 40px;
+        margin: 10px;
+        animation: fadeIn 2s ease-out forwards;
+        z-index: 10;
+        font-family:'Courier New', Courier, monospace;
+        text-shadow: 1px 2px 2px #000000;
+      }
+
+      p {
+        font-size: 20px;
+        margin: 5px;
+        font-family:'Courier New', Courier, monospace;
+
+        animation: fadeIn 2s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .star {
+        position: absolute;
+        font-size: 12px;
+        color: white;
+        opacity: 0.6;
+        animation: twinkle 5s linear infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.5);
+          opacity: 1;
+        }
+      }
+
+      button {
+        border: none;
+        background: transparent;
+        font-size: 50px;
+        color: white;
+        cursor: pointer;
+        animation: pulse 2s infinite;
+      }
+
+      .hint {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #aaaaaa;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>❤️IRODA❤️</h1>
+      <p>Men seni sevaman 💕</p>
+    </header>
+    <div class="content">
+      <button id="button">❤️</button>
+      <p class="hint">Ikki martta bossang haqiqatni ko'rasan!</p>
+    </div>
+    <script>
+      const body = document.body;
+      const button = document.getElementById("button");
+      const header = document.querySelector("header");
+      const content = document.querySelector(".content");
+      const starCount = 200; // Yulduzlar soni
+      let clickCount = 0;
+
+      // Tasodifiy joylarda yulduz yaratish
+      function createStars() {
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement("div");
+          star.classList.add("star");
+          star.textContent = "*";
+          star.style.left = `${Math.random() * window.innerWidth}px`;
+          star.style.top = `${Math.random() * window.innerHeight}px`;
+          star.style.animationDuration = `${Math.random() * 9 + 2}s`;
+          body.appendChild(star);
+        }
+      }
+
+      // Tugmani ikki marta bosilganda hodisa
+      button.addEventListener("click", () => {
+        clickCount++;
+        if (clickCount === 2) {
+          content.style.display = "none";
+          header.style.display = "block";
+          createStars();
+        }
+      });
+    </script>
+  </body>
+</html>
